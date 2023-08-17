@@ -1,4 +1,39 @@
-window.onload = function(){
+var imageUrls;
+var request = new XMLHttpRequest();
+request.open('GET', 
+    'https://people.ece.ubc.ca/kumseok/vsp23/images',true);
+request.onload = function(){
+    if (request.status == 200){
+        if (request.getResponseHeader('Content-Type')
+            .includes('application/json')){
+                imageUrls = JSON.parse(request.responseText);
+                console.log('Image URLs: ', imageUrls, 'json format:', request.responseText);
+                PhotoGalleryLib.onSizeClassChange(sizeChangeCallback);
+                prepPresentationMode();
+            }
+        }
+    }
+console.log('send request...');
+request.send();
+
+function sizeChangeCallback(size){
+    console.log('Screen size is '+ size);
+    
+    var oldGallery = document.getElementById("imagesGrid");
+    if (oldGallery == null){
+        var newGallery = PhotoGalleryLib.generateGrid(imageUrls, size);
+        var container = document.getElementById('container');
+        container.appendChild(newGallery);
+    }
+    if (oldGallery != null){
+        var parent = oldGallery.parentNode;
+        parent.removeChild(oldGallery);
+        var newGallery = PhotoGalleryLib.generateGrid(imageUrls, size);
+        parent.appendChild(newGallery);
+    }
+}
+
+function prepPresentationMode(){
     
     var timer = false;
     var closeButton = function(){
@@ -11,7 +46,6 @@ window.onload = function(){
     var imgClickCallback = function(index){
         var images = document.querySelectorAll('#imagesGrid img');
         src = images[index].src;
-        console.log('imgClickCallback',src);
         PhotoGalleryLib.createModal();
         PhotoGalleryLib.setModalImgSrc(src);
         PhotoGalleryLib.openPresentationModal();
@@ -77,7 +111,4 @@ window.onload = function(){
         initSlideshow();
         makeSlideshow();
     });
-
-
-
 }
