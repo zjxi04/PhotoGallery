@@ -3,7 +3,7 @@ imageUrls = ["images/image1.jpg", "images/image2.jpg",
     "images/image5.jpg", "images/image6.jpg", 
     "images/image7.jpg", "images/image8.jpg"];
 
-function callback(size){
+function sizeChangeCallback(size){
     console.log('Screen size is '+ size);
 
     var oldGallery = document.getElementById("imagesGrid");
@@ -13,4 +13,4 @@ function callback(size){
     if ((oldGallery != null)) oldGallery.appendChild(newGallery);
 }
 
-PhotoGalleryLib.onSizeClassChange(callback);
+PhotoGalleryLib.onSizeClassChange(sizeChangeCallback);
