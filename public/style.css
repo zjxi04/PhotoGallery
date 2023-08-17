@@ -1,0 +1,36 @@
+#mainBody {
+  width: 1000px; 
+  /* A) Set the width of the content to 1000px */
+  margin: 0 auto; 
+  /* B) Center the content within the web page using margin */
+}
+
+h1 {
+    color: greenyellow;
+    display: block;
+    text-align: center;
+}
+
+#imagesGrid {
+    width: 100%;
+}
+
+/* This rule targets the <img> elements inside the element with the id="imagesGrid"*/
+#imagesGrid img{
+    max-width: 100%; 
+    /* C) Make sure images fit nicely inside the table without overflowing */
+    height: auto; 
+    /* Preserve image aspect ratio */
+    display: block; 
+    transition: all 0.3s ease; 
+    /* Apply a smooth transition to the image changes */
+  }
+
+/* This rule targets the <img> elements 
+inside the element with the id="imagesGrid" when they are being hovered over.*/
+  #imagesGrid img:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.6);
+    /* D) Add a shadow to images when hovered over */
+    border-radius: 20%; 
+    /* E) Make the border of the images rounded on the edges when hovered over */
+  }
